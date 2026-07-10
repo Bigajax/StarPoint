@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta Star Point Maringá */
+  --color-ink: #0a0a0a;
+  --color-paper: #ffffff;
+  --color-cloud: #f3f3f3;
+  --color-steel: #8a8a8a;
+  --color-star: #ffd500;
+  --color-whats: #25d366;
+  --color-alert: #e53935;
+
+  --font-display: var(--font-archivo), "Arial Black", sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --animate-marquee: marquee 44s linear infinite;
+  --animate-topbar: topbar 12s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes topbar {
+    0%, 28% { transform: translateY(0); }
+    33%, 61% { transform: translateY(-100%); }
+    66%, 94% { transform: translateY(-200%); }
+    100% { transform: translateY(-200%); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-star);
+  color: var(--color-ink);
+}
+
+/* Foco visível — anel amarelo sobre qualquer fundo */
+:focus-visible {
+  outline: 3px solid var(--color-star);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Tipografia display */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 115%;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.display-black {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+/* Palavra em contorno — assinatura tipográfica */
+.word-outline,
+.word-outline-star {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-paper);
+}
+.word-outline-star {
+  -webkit-text-stroke-color: var(--color-star);
+}
+.word-outline-ink {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-ink);
+}
+@supports not (-webkit-text-stroke: 2px black) {
+  .word-outline { color: inherit; }
+  .word-outline-star { color: var(--color-star); }
+  .word-outline-ink { color: var(--color-ink); }
+}
+
+/* Eyebrow com a estrela do logo */
+.star-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.star-eyebrow::before {
+  content: "★";
+  color: var(--color-star);
+  font-size: 0.9rem;
+  -webkit-text-stroke: 0;
+}
+.star-eyebrow--dark::before {
+  color: var(--color-star);
+}
+
+/* Corte diagonal — o "split" do logo */
+.clip-diag {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+}
+.clip-diag-r {
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+}
+
+/* Scrollbar discreta nos carrosséis */
+.scroll-slim {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-steel) transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* a faixa de marcas continua girando: movimento lento, contínuo e
+     pausável no hover — sem ela parada a seção perde a função */
+  .animate-marquee {
+    animation: marquee 44s linear infinite !important;
+  }
+}
