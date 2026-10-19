@@ -120,6 +120,12 @@ export function Footer() {
           <p>
             Produtos originais · Reserve pelo WhatsApp · Retire na loja
           </p>
+          <p>
+            vitrine por{" "}
+            <a href="https://rafaelrazeira.com.br/vitrine-digital" target="_blank" rel="noopener" className="transition-colors hover:text-paper">
+              Rafael Razeira Estúdio
+            </a>
+          </p>
         </div>
       </div>
     </footer>
